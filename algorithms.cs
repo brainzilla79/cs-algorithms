@@ -66,10 +66,22 @@ namespace Algorithms {
       Console.ResetColor ();
       Console.WriteLine ("UNIQ SUBS");
       String[] subAr = { "a", "b", "c", "d", "ab", "bc", "cd", "abc", "bcd", "abcd" };
-      HashSet<string> subAns = new HashSet<string>(subAr);
-      ans = subAns.SetEquals(UniqSubs("abcd"));
+      HashSet<string> subAns = new HashSet<string> (subAr);
+      ans = subAns.SetEquals (UniqSubs ("abcd"));
       status = ProccessResult (ans);
       Console.WriteLine ("UniqSubs('abcd') should return all the substrings {0}", status);
+
+      // Longest Contiguous Subsum 
+      Console.ResetColor ();
+      Console.WriteLine ("UNIQ SUBS");
+      int[] lcsAr1 = { 4, -1, 5, 6, -13, 2 };
+      ans = Lcs (lcsAr1) == 14;
+      status = ProccessResult (ans);
+      Console.WriteLine ("Lcs([4, -1, 5, 6, -13, 2]) should equal 14 {0}", status);
+      int[] lcsAr2 = {-2, 1, -3, 4, -1, 2, 1, -5, 4 };
+      ans = Lcs (lcsAr2) == 6;
+      status = ProccessResult (ans);
+      Console.WriteLine ("Lcs([-2, 1, -3, 4, -1, 2, 1, -5, 4]) should equal 6 {0}", status);
 
     }
 
@@ -163,6 +175,22 @@ namespace Algorithms {
         }
       }
       return subs;
+    }
+
+    static int Lcs (int[] nums) {
+      int currSum = 0;
+      int totalSum = nums[0] | 0;
+      for (int i = 0; i < nums.Length; i++) {
+        int num = nums[i];
+        currSum += num;
+        if (currSum > totalSum) {
+          totalSum = currSum;
+        }
+        if (currSum < 0) {
+          currSum = 0;
+        }
+      }
+      return totalSum;
     }
   }
 }
