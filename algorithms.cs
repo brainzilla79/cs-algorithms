@@ -48,12 +48,19 @@ namespace Algorithms {
 
       // Is Palindrome 
       Console.ResetColor ();
-      Console.WriteLine ("IsPalindrome");
-      ans = !IsPalindrome ("ricecar"); 
+      Console.WriteLine ("IS PALINDROME");
+      ans = !IsPalindrome ("ricecar");
       status = ProccessResult (ans);
-      Console.WriteLine("IsPalindrome('ricecar') shoud be false {0}", status);
-      status = ProccessResult(IsPalindrome("racecar"));
-      Console.WriteLine("IsPalindrome('racecar') shoud be true {0}", status);
+      Console.WriteLine ("IsPalindrome('ricecar') shoud be false {0}", status);
+      status = ProccessResult (IsPalindrome ("racecar"));
+      Console.WriteLine ("IsPalindrome('racecar') shoud be true {0}", status);
+
+      // Folding Cipher 
+      Console.ResetColor ();
+      Console.WriteLine ("FOLDING CIPHER");
+      ans = FoldingCipher ("abcm") == "zyxn";
+      status = ProccessResult (ans);
+      Console.WriteLine ("FoldingCpiher('abcm') should equal 'zyxn' {0}", status);
     }
 
     static string ProccessResult (bool ans) {
@@ -121,6 +128,21 @@ namespace Algorithms {
         }
       }
       return true;
+    }
+    static string FoldingCipher (string s) {
+      char[] alpha = "abcdefghijklmnopqrstuvwxyz".ToCharArray ();
+      char[] reverse = new char[alpha.Length];
+      Array.Copy(alpha, 0,reverse, 0, alpha.Length);
+      Array.Reverse (reverse);
+      Dictionary<char, char> alphaMap = new Dictionary<char, char> ();
+      for (int i = 0; i < alpha.Length; i++) {
+        alphaMap.Add (alpha[i], reverse[i]);
+      }
+      string result = "";
+      for (int i = 0; i < s.Length; i++) {
+        result += alphaMap[s[i]];
+      }
+      return result;
     }
   }
 }
