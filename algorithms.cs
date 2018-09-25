@@ -61,6 +61,16 @@ namespace Algorithms {
       ans = FoldingCipher ("abcm") == "zyxn";
       status = ProccessResult (ans);
       Console.WriteLine ("FoldingCpiher('abcm') should equal 'zyxn' {0}", status);
+
+      // Uniq Subs 
+      Console.ResetColor ();
+      Console.WriteLine ("UNIQ SUBS");
+      String[] subAr = { "a", "b", "c", "d", "ab", "bc", "cd", "abc", "bcd", "abcd" };
+      HashSet<string> subAns = new HashSet<string>(subAr);
+      ans = subAns.SetEquals(UniqSubs("abcd"));
+      status = ProccessResult (ans);
+      Console.WriteLine ("UniqSubs('abcd') should return all the substrings {0}", status);
+
     }
 
     static string ProccessResult (bool ans) {
@@ -132,17 +142,27 @@ namespace Algorithms {
     static string FoldingCipher (string s) {
       char[] alpha = "abcdefghijklmnopqrstuvwxyz".ToCharArray ();
       char[] reverse = new char[alpha.Length];
-      Array.Copy(alpha, 0,reverse, 0, alpha.Length);
+      Array.Copy (alpha, 0, reverse, 0, alpha.Length);
       Array.Reverse (reverse);
       Dictionary<char, char> alphaMap = new Dictionary<char, char> ();
       for (int i = 0; i < alpha.Length; i++) {
-        alphaMap.Add (alpha[i], reverse[i]);
+        alphaMap[alpha[i]] = reverse[i];
       }
       string result = "";
       for (int i = 0; i < s.Length; i++) {
         result += alphaMap[s[i]];
       }
       return result;
+    }
+
+    static HashSet<string> UniqSubs (string s) {
+      HashSet<string> subs = new HashSet<string> ();
+      for (int i = 0; i < s.Length; i++) {
+        for (int j = 1; j <= s.Length - i; j++) {
+          subs.Add (s.Substring (i, j));
+        }
+      }
+      return subs;
     }
   }
 }
