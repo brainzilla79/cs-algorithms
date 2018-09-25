@@ -33,10 +33,19 @@ namespace Algorithms {
       // Fibs 
       Console.ResetColor ();
       Console.WriteLine ("FIBS");
-      int[] ans1 = {0, 1, 1};
-      ans = Enumerable.SequenceEqual(Fibs(3), ans1);
-      status = ProccessResult(ans);
-      Console.WriteLine ("Fibs should equal [0, 1, 1] {0}", status);
+      int[] ans1 = { 0, 1, 1 };
+      ans = Enumerable.SequenceEqual (Fibs (3), ans1);
+      status = ProccessResult (ans);
+      Console.WriteLine ("Fibs(3) should equal [0, 1, 1] {0}", status);
+      int[] ans2 = { 0, 1 };
+      ans = Enumerable.SequenceEqual (Fibs (2), ans2);
+      status = ProccessResult (ans);
+      Console.WriteLine ("Fibs(2) should equal [0, 1] {0}", status);
+      int[] ans3 = {0, 1, 1, 2, 3};
+      ans = Enumerable.SequenceEqual (Fibs (5), ans3);
+      status = ProccessResult (ans);
+      Console.WriteLine ("Fibs(5) should equal [0, 1, 1, 2, 3] {0}", status);
+
     }
 
     static string ProccessResult (bool ans) {
@@ -89,7 +98,7 @@ namespace Algorithms {
         return null;
       }
       if (num < 3) {
-        return fibs.Skip (num - 1).ToArray ();
+        return fibs.Take (num).ToArray ();
       }
       while (fibs.Count < num) {
         fibs.Add (fibs[fibs.Count - 2] + fibs[fibs.Count - 1]);
