@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Algorithms {
   class Program {
@@ -26,6 +29,14 @@ namespace Algorithms {
       ans = SumRec (ar) == 6;
       status = ProccessResult (ans);
       Console.WriteLine ("Sum Rec should equal 6 {0}", status);
+
+      // Fibs 
+      Console.ResetColor ();
+      Console.WriteLine ("FIBS");
+      int[] ans1 = {0, 1, 1};
+      ans = Enumerable.SequenceEqual(Fibs(3), ans1);
+      status = ProccessResult(ans);
+      Console.WriteLine ("Fibs should equal [0, 1, 1] {0}", status);
     }
 
     static string ProccessResult (bool ans) {
@@ -72,13 +83,18 @@ namespace Algorithms {
     }
 
     static int[] Fibs (int num) {
-      List<int> result = new List<int> ();
       int[] ar = { 0, 1 };
-      result.AddRange (ar);
+      List<int> fibs = new List<int> (ar);
       if (num < 1) {
         return null;
       }
-
+      if (num < 3) {
+        return fibs.Skip (num - 1).ToArray ();
+      }
+      while (fibs.Count < num) {
+        fibs.Add (fibs[fibs.Count - 2] + fibs[fibs.Count - 1]);
+      }
+      return fibs.ToArray ();
     }
   }
 }
