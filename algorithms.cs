@@ -41,11 +41,19 @@ namespace Algorithms {
       ans = Enumerable.SequenceEqual (Fibs (2), ans2);
       status = ProccessResult (ans);
       Console.WriteLine ("Fibs(2) should equal [0, 1] {0}", status);
-      int[] ans3 = {0, 1, 1, 2, 3};
+      int[] ans3 = { 0, 1, 1, 2, 3 };
       ans = Enumerable.SequenceEqual (Fibs (5), ans3);
       status = ProccessResult (ans);
       Console.WriteLine ("Fibs(5) should equal [0, 1, 1, 2, 3] {0}", status);
 
+      // Is Palindrome 
+      Console.ResetColor ();
+      Console.WriteLine ("IsPalindrome");
+      ans = !IsPalindrome ("ricecar"); 
+      status = ProccessResult (ans);
+      Console.WriteLine("IsPalindrome('ricecar') shoud be false {0}", status);
+      status = ProccessResult(IsPalindrome("racecar"));
+      Console.WriteLine("IsPalindrome('racecar') shoud be true {0}", status);
     }
 
     static string ProccessResult (bool ans) {
@@ -104,6 +112,15 @@ namespace Algorithms {
         fibs.Add (fibs[fibs.Count - 2] + fibs[fibs.Count - 1]);
       }
       return fibs.ToArray ();
+    }
+
+    static bool IsPalindrome (string s) {
+      for (int i = 0; i < s.Length / 2; i++) {
+        if (s[i] != s[s.Length - 1 - i]) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 }
