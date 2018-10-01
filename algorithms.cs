@@ -73,7 +73,7 @@ namespace Algorithms {
 
       // Longest Contiguous Subsum 
       Console.ResetColor ();
-      Console.WriteLine ("UNIQ SUBS");
+      Console.WriteLine ("LONGEST CONTIGUOUS SUBSUM");
       int[] lcsAr1 = { 4, -1, 5, 6, -13, 2 };
       ans = Lcs (lcsAr1) == 14;
       status = ProccessResult (ans);
@@ -82,6 +82,15 @@ namespace Algorithms {
       ans = Lcs (lcsAr2) == 6;
       status = ProccessResult (ans);
       Console.WriteLine ("Lcs([-2, 1, -3, 4, -1, 2, 1, -5, 4]) should equal 6 {0}", status);
+
+      // Sill Years 
+      Console.ResetColor ();
+      Console.WriteLine ("SILLY YEARS");
+      int[] yearsAr1 = { 2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626 };
+      List<int> yearsAns1 = new List<int> (yearsAr1);
+      ans = yearsAns1.SequenceEqual (SillyYears (1978));
+      status = ProccessResult (ans);
+      Console.WriteLine ("SillYears(1978) should contain the correct years {0}", status);
 
     }
 
@@ -192,5 +201,22 @@ namespace Algorithms {
       }
       return totalSum;
     }
+
+    static List<int> SillyYears (int year) {
+      List<int> years = new List<int> ();
+      int currYear = year + 1;
+      while (years.Count < 10) {
+        string strYear = currYear.ToString ();
+        int left = Int32.Parse (strYear.Substring (0, 2));
+        int right = Int32.Parse (strYear.Substring (2, 2));
+        int middle = Int32.Parse (strYear.Substring (1, 2));
+        if (left + right == middle) {
+          years.Add (currYear);
+        }
+        currYear += 1;
+      }
+      return years;
+    }
+
   }
 }
